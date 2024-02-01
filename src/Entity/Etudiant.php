@@ -26,6 +26,9 @@ class Etudiant
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $surnom = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $promotion = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,17 @@ class Etudiant
     public function setSurnom(?string $surnom): static
     {
         $this->surnom = $surnom;
+
+        return $this;
+    }
+    public function getPromotion(): ?string
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?string $promotion): static
+    {
+        $this->promotion = $promotion;
 
         return $this;
     }

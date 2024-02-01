@@ -18,12 +18,13 @@ class EtudiantController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'etudiant_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_etudiant_show', methods: ['GET'])]
     public function show(Etudiant $etudiant): Response
     {
-        return $this->render('etudiant/show.html.twig', [
-            'etudiant' => $etudiant
-        ]);
-    }
+    return $this->render('etudiant/show.html.twig', [
+        'etudiant' => $etudiant
+    ]);
+}
+
 }
 

@@ -22,7 +22,8 @@ class Eleve
     #[ORM\OneToMany(mappedBy: 'eleve', targetEntity: Note::class)]
     private Collection $notes;
 
-    #[ORM\ManyToOne(inversedBy: 'eleves')]
+    #[ORM\ManyToOne(targetEntity: Promotion::class)]
+    #[ORM\JoinColumn(name: "promotion_id", referencedColumnName: "id")]
     private ?Promotion $promotion = null;
 
     public function __construct()

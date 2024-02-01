@@ -21,11 +21,11 @@
         {% for etudiant in etudiants %}
             <tr>
                 <td>{{etudiant.id}}</td>
-                <td><a href="{{path('app_etudiant_show', {'id': eleve.id}) }}">{{etudiant.nom}} {{ etudiant.prenom}}</td>
+                <td><a href="{{path('app_etudiant_show', {'id': etudiant.id}) }}">{{etudiant.nom}} {{ etudiant.prenom}}</td>
                 <td>{{ etudiant.dateNaiss ? etudiant.dateNaiss|date('Y-m-d') : ''}}</td>
                 <td>{{ etudiant.surnom}}</td>
-                <td>{{ etudiant.promition.libelle}}</td>
-                <td>{{eleve.maison.nom}}</td>
+                <td>{{ etudiant.promotion.libelle}}</td>
+                <td>{{etudiant.maison.nom}}</td>
             </tr>
         {% endfor %}
         </tbody>
