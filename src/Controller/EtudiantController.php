@@ -8,11 +8,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EtudiantController extends AbstractController
 {
-    #[Route('/etudiant', name: 'app_etudiant')]
-    public function index(): Response
+    #[Route('/', name: 'etudiant_index', methods: ['GET'])]
+    public function index(EtudiantRepository $etudiantRepository): Response
     {
         return $this->render('etudiant/index.html.twig', [
-            'controller_name' => 'EtudiantController',
+            'etudiant' => $etudiantRepository->findAll(),
         ]);
     }
+    #[Route('/{id}', 'etudiant_show', ['GET'])]
+    public function show(Etudiant $etudiant): Response
+    {
+        return $this->render{'etudiant/show.html.twig', [
+            'etudiant' => $etudiant,
+        ]};
+    }
+
+
+
 }
+    

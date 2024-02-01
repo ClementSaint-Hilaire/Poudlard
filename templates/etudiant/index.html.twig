@@ -1,20 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EtudiantController!{% endblock %}
+{% block title %}Etudiant index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Etudiant<h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/webstudent/src/Controller/EtudiantController.php'|file_link(0) }}">src/Controller/EtudiantController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/webstudent/templates/etudiant/index.html.twig'|file_link(0) }}">templates/etudiant/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <table class="table">
+        <thread>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>DateNaiss</th>
+                <th>Surnom</th>
+                <th>Promotion</th>
+                <th>Maison</th>
+            </tr>
+        </thread>
+        <tbody>
+        {% for etudiant in etudiants %}
+            <tr>
+                <td>{{etudiant.id}}</td>
+                <td><a href="{{path('app_etudiant_show', {'id': eleve.id}) }}">{{etudiant.nom}} {{ etudiant.prenom}}</td>
+                <td>{{ etudiant.dateNaiss ? etudiant.dateNaiss|date('Y-m-d') : ''}}</td>
+                <td>{{ etudiant.surnom}}</td>
+                <td>{{ etudiant.promition.libelle}}</td>
+                <td>{{eleve.maison.nom}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    <table>  
+
 {% endblock %}
