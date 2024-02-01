@@ -18,13 +18,9 @@ class Promotion
     #[ORM\Column(length: 60, nullable: true)]
     private ?string $libelle = null;
 
-    #[ORM\OneToMany(mappedBy: 'promotion', targetEntity: Eleve::class)]
-    private Collection $eleves;
+    #[ORM\OneToMany(mappedBy: 'promotion', targetEntity: Etudiant::class)]
+    private Collection $etudiants;
 
-    public function __construct()
-    {
-        $this->eleves = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -41,32 +37,32 @@ class Promotion
         $this->libelle = $libelle;
 
         return $this;
-    }
+    }   
 
     /**
-     * @return Collection<int, Eleve>
+     * @return Collection<int, Etudiant>
      */
-    public function getEleves(): Collection
+    public function getEtudiants(): Collection
     {
-        return $this->eleves;
+        return $this->etudiants;
     }
 
-    public function addElefe(Eleve $elefe): static
+    public function addEtudiant(Etudiant $etudiant): static
     {
-        if (!$this->eleves->contains($elefe)) {
-            $this->eleves->add($elefe);
-            $elefe->setPromotion($this);
+        if (!$this->etudiants->contains($etudiant)) {
+            $this->etudiants->add($etudiant);
+            $etudiant->setPromotion($this);
         }
 
         return $this;
     }
 
-    public function removeElefe(Eleve $elefe): static
+    public function removeEtudiant(Etudiant $etudiant): static
     {
-        if ($this->eleves->removeElement($elefe)) {
+        if ($this->etudiants->removeElement($etudiant)) {
             // set the owning side to null (unless already changed)
-            if ($elefe->getPromotion() === $this) {
-                $elefe->setPromotion(null);
+            if ($etudiant->getPromotion() === $this) {
+                $etudiant->setPromotion(null);
             }
         }
 

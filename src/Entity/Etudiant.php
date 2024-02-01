@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EtudiantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,8 +28,19 @@ class Etudiant
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $surnom = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $promotion = null;
+    #[ORM\ManyToOne(inversedBy: 'etudiants')]
+    private ?Promotion $promotion = null;
+
+    #[ORM\ManyToOne(inversedBy: 'etudiants')]
+    private ?Note $notes = null;
+
+    #[ORM\OneToMany(mappedBy: 'etudiant', targetEntity: maison::class)]
+    private Collection $maison;
+
+    public function __construct()
+    {
+        $this->maison = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -81,14 +94,57 @@ class Etudiant
 
         return $this;
     }
-    public function getPromotion(): ?string
+
+    public function getPromotion(): ?Promotion
     {
         return $this->promotion;
     }
 
-    public function setPromotion(?string $promotion): static
+    public function setPromotion(?Promotion $promotion): static
     {
         $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    public function getNotes(): ?Note
+    {
+        return $this->notes;
+    }
+
+    public function setNotes(?Note $notes): static
+    {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, maison>
+     */
+    public function getMaison(): Collection
+    {
+        return $this->maison;
+    }
+
+    public function addMaison(maison $maison): static
+    {
+        if (!$this->maison->contains($maison)) {
+            $this->maison->add($maison);
+            $maison->setEtudiant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaison(maison $maison): static
+    {
+        if ($this->maison->removeElement($maison)) {
+            // set the owning side to null (unless already changed)
+            if ($maison->getEtudiant() === $this) {
+                $maison->setEtudiant(null);
+            }
+        }
 
         return $this;
     }

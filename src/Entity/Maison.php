@@ -18,14 +18,10 @@ class Maison
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $nom = null;
 
-    #[ORM\OneToMany(mappedBy: 'maison', targetEntity: Eleve::class)]
-    private Collection $eleves;
+    #[ORM\ManyToOne(inversedBy: 'maison')]
+    private ?Etudiant $etudiant = null;
 
-    public function __construct()
-    {
-        $this->eleves = new ArrayCollection();
-    }
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -43,33 +39,17 @@ class Maison
         return $this;
     }
 
-    /**
-     * @return Collection<int, Eleve>
-     */
-    public function getEleves(): Collection
+    public function getEtudiant(): ?Etudiant
     {
-        return $this->eleves;
+        return $this->etudiant;
     }
 
-    public function addElefe(Eleve $elefe): static
+    public function setEtudiant(?Etudiant $etudiant): static
     {
-        if (!$this->eleves->contains($elefe)) {
-            $this->eleves->add($elefe);
-            $elefe->setMaison($this);
-        }
+        $this->etudiant = $etudiant;
 
         return $this;
     }
 
-    public function removeElefe(Eleve $elefe): static
-    {
-        if ($this->eleves->removeElement($elefe)) {
-            // set the owning side to null (unless already changed)
-            if ($elefe->getMaison() === $this) {
-                $elefe->setMaison(null);
-            }
-        }
-
-        return $this;
-    }
+    
 }

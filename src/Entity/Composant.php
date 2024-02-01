@@ -24,6 +24,8 @@ class Composant
     #[ORM\ManyToMany(targetEntity: Baguette::class, mappedBy: 'composants')]
     private Collection $baguettes;
 
+    
+
     public function __construct()
     {
         $this->baguettes = new ArrayCollection();
@@ -84,4 +86,6 @@ class Composant
 
         return $this;
     }
+
+   
 }

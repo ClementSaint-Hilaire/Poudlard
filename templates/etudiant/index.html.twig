@@ -24,8 +24,8 @@
                 <td><a href="{{path('app_etudiant_show', {'id': etudiant.id}) }}">{{etudiant.nom}} {{ etudiant.prenom}}</td>
                 <td>{{ etudiant.dateNaiss ? etudiant.dateNaiss|date('Y-m-d') : ''}}</td>
                 <td>{{ etudiant.surnom}}</td>
-                <td>{{ etudiant.promotion.libelle}}</td>
-                <td>{{etudiant.maison.nom}}</td>
+                <td>{{ (etudiant.promotion.libelle is defined) ? eleve.promotion.libelle : ''}}</td>
+                <td>{{ (etudiant.maison.nom is defined) ? eleve.maison.nom : '' }}</td>
             </tr>
         {% endfor %}
         </tbody>
