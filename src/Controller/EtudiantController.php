@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\EtudiantRepository;
+
 
 class EtudiantController extends AbstractController
 {
@@ -12,18 +14,16 @@ class EtudiantController extends AbstractController
     public function index(EtudiantRepository $etudiantRepository): Response
     {
         return $this->render('etudiant/index.html.twig', [
-            'etudiant' => $etudiantRepository->findAll(),
+            'etudiants' => $etudiantRepository->findAll(),
         ]);
     }
-    #[Route('/{id}', 'etudiant_show', ['GET'])]
+
+    #[Route('/{id}', name: 'etudiant_show', methods: ['GET'])]
     public function show(Etudiant $etudiant): Response
     {
-        return $this->render{'etudiant/show.html.twig', [
-            'etudiant' => $etudiant,
-        ]};
+        return $this->render('etudiant/show.html.twig', [
+            'etudiant' => $etudiant
+        ]);
     }
-
-
-
 }
-    
+
