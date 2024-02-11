@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Etudiant; // Import de l'entité Etudiant
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EtudiantRepository;
-
 
 class EtudiantController extends AbstractController
 {
@@ -20,11 +20,9 @@ class EtudiantController extends AbstractController
 
     #[Route('/{id}', name: 'app_etudiant_show', methods: ['GET'])]
     public function show(Etudiant $etudiant): Response
-        {
-    return $this->render('etudiant/show.html.twig', [
-        'etudiant' => $etudiant
-    ]);
+    {
+        return $this->render('etudiant/show.html.twig', [
+            'etudiant' => $etudiant
+        ]);
+    }
 }
-
-}
-
