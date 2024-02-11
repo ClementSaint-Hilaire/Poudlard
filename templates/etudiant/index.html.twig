@@ -4,31 +4,31 @@
 
 {% block body %}
 
-    <h1>Etudiant<h1>
+    <h1>Etudiant</h1>
 
     <table class="table">
-        <thread>
+        <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>DateNaiss</th>
+                <th>Date de Naissance</th>
                 <th>Surnom</th>
                 <th>Promotion</th>
                 <th>Maison</th>
             </tr>
-        </thread>
+        </thead>
         <tbody>
         {% for etudiant in etudiants %}
             <tr>
-                <td>{{etudiant.id}}</td>
-                <td><a href="{{path('app_etudiant_show', {'id': etudiant.id}) }}">{{etudiant.nom}} {{ etudiant.prenom}}</td>
-                <td>{{ etudiant.dateNaiss ? etudiant.dateNaiss|date('Y-m-d') : ''}}</td>
-                <td>{{ etudiant.surnom}}</td>
-                <td>{{ (etudiant.promotion.libelle is defined) ? eleve.promotion.libelle : ''}}</td>
-                <td>{{ (etudiant.maison.nom is defined) ? eleve.maison.nom : '' }}</td>
+                <td>{{ etudiant.id }}</td>
+                <td><a href="{{ path('app_etudiant_show', {'id': etudiant.id}) }}">{{ etudiant.nom }} {{ etudiant.prenom }}</a></td>
+                <td>{{ etudiant.dateNaiss ? etudiant.dateNaiss|date('Y-m-d') : '' }}</td>
+                <td>{{ etudiant.surnom }}</td>
+                <td>{{ etudiant.promotion.libelle ?? '' }}</td>
+                <td>{{ etudiant.maison.nom ?? '' }}</td>
             </tr>
         {% endfor %}
         </tbody>
-    <table>  
+    </table>  
 
 {% endblock %}
